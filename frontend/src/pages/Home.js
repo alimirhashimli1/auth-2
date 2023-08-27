@@ -8,9 +8,14 @@ import WorkoutForm from '../components/WorkoutForm'
 
 const Home = () => {
   const {workouts, dispatch} = useWorkoutsContext()
-  const {user} = useAuthContext
+  const {user} = useAuthContext()
 
   useEffect(() => {
+    if(!user){
+      return
+    }
+
+
     const fetchWorkouts = async () => {
       const response = await fetch('/api/workouts', {
         headers: {
